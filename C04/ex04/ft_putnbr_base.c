@@ -6,7 +6,7 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 07:21:23 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/09/30 07:40:06 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/09/30 08:26:49 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_putnbr_base(int nbr,char *base)
 
 int main()
 {
-	ft_putnbr_base(3423,"abcde");
+	ft_putnbr_base(-200,"0123456789abcdef");
 
 }
 
