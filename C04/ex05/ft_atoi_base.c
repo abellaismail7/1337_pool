@@ -6,7 +6,7 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 08:28:59 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/09/30 09:52:01 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/09/30 15:46:39 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_atoi_base(char *str, char *base)
 	{
 		c = get_position(base, *str);
 		if (c < 0)
-			break;
+			break ;
 		res *= len;
 		res -= c;
 		str++;

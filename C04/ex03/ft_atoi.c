@@ -6,21 +6,28 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:36:39 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/09/30 07:12:11 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/09/30 17:11:37 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_atoi(char * str){
-	int sign = -1;
-	int res;
-	if(*str == '-')
-	{
-		str++;
-		sign = 1;
-	}
-	else if(*str == '+')
-		str++;
+int	is_space(char c)
+{
+	return (c >= '\t' && c <= '\r') || c == ' '; 
+}
 
+int ft_atoi(char * str){
+	int sign;
+	int res;
+	
+	sign = -1;
+	while (is_space(*str))
+		str++;
+	while (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+	}
 	res = 0;
 	while (*str >= '0' && *str <= '9'){
 		res *= 10;
@@ -34,6 +41,6 @@ int ft_atoi(char * str){
 #include<stdio.h>
 int main()
 {
-	int res = ft_atoi("2147483646");
+	int res = ft_atoi("\t	+0");
 	printf("%d", res);
 }
