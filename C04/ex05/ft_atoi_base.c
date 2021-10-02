@@ -6,9 +6,14 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 08:28:59 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/09/30 15:46:39 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/10/02 18:16:10 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	is_space(char c)
+{
+	return ((c >= '\t' && c <= '\r') || c == ' ');
+}
 
 int	validate(char *base)
 {
@@ -18,7 +23,7 @@ int	validate(char *base)
 	i = 0;
 	while (base[i])
 	{
-		if (base[i] == '+' || base[i] == '-')
+		if (base[i] == '+' || base[i] == '-' || is_space(base[i]))
 			return (0);
 		j = i + 1;
 		while (base[j])
@@ -32,22 +37,6 @@ int	validate(char *base)
 	if (i < 2)
 		return (0);
 	return (i);
-}
-
-int	get_sign(char *str)
-{
-	int	sign;
-
-	sign = 1;
-	while (*str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign -= 1;
-		str++;
-	}
-	return (sign);
 }
 
 int	get_position(char *base, char c)
@@ -65,6 +54,17 @@ int	get_position(char *base, char c)
 		return (-1);
 }
 
+char	*get_sign(int *sign, char *str)
+{
+	while (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			*sign *= -1;
+		str++;
+	}
+	return (str);
+}
+
 int	ft_atoi_base(char *str, char *base)
 {
 	int		sign;
@@ -72,7 +72,10 @@ int	ft_atoi_base(char *str, char *base)
 	int		len;
 	char	c;
 
-	sign = get_sign(str) * -1;
+	while (is_space(*str))
+		str++;
+	sign = -1;
+	str = get_sign(&sign, str);
 	len = validate(base);
 	if (len < 2)
 		return (0);
@@ -88,10 +91,10 @@ int	ft_atoi_base(char *str, char *base)
 	}
 	return (res * sign);
 }
-
-#include<stdio.h>
-int main()
-{
-	int res = ft_atoi_base("bacd","abcde");
-	printf("%d", res);
-}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	int res = ft_atoi_base("\t\v\012\n   -+---+1123","0123djksf9");
+//	printf("%d", res);
+//}

@@ -1,22 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 12:02:20 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/09/29 14:59:11 by iait-bel         ###   ########.fr       */
+/*   Created: 2021/09/30 14:23:36 by iait-bel          #+#    #+#             */
+/*   Updated: 2021/09/30 18:16:25 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int	min(unsigned int a, unsigned int b)
-{
-	if (a > b)
-		return (b);
-	else
-		return (a);
-}
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
@@ -26,36 +18,34 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 
 	i = 0;
 	j = 0;
-	k = size;
-	if (size == 0)
-		return (0);
+	k = size - 1;
 	while (dest[i])
 		i++;
-	k -= i + 1;
+	k -= i;
 	while (src[j])
 	{
 		if (j < k)
-			dest[i++] = src[j];
+			dest[i + j] = src[j];
 		j++;
 	}
-	dest[i] = 0;
-	if (i < size)
+	dest[i + j] = 0;
+	if (i < (int) size)
 		return (j + i);
 	else
 		return (j + size);
 }
-
 #include<stdio.h>
 #include<string.h>
 int main()
 {
-	int n = 3;
-	char s1[] = "ismail";
-	char s2[20] = "bella";
-	char s3[20] = "bella";
+	int n = 57;
+	char s1[] = "DwtVHDBFVtBFlcmkpbYjlxZoarMeEjcBVMLHYPqliwCjjfFyXZjPnsTWY";
+	char s2[200] = "cBVMLHYPqliwCjjfFyXZjPnsTWY";
+	char s3[200] = "cBVMLHYPqliwCjjfFyXZjPnsTWY";
 
 	int a = ft_strlcat(s2,s1,n);
 	int b = strlcat(s3,s1,n);
 	
-	printf("%s  %d\n%s  %d",s2 ,a ,s3 ,b );
+	printf("%s  %d\n",s2 ,a );
+	printf("%s  %d",s3 ,b );
 }

@@ -6,7 +6,7 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:07:12 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/09/29 18:08:51 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/10/02 19:41:38 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@ int	ft_strlen(char *str)
 {
 	int	i;
 
+	i = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
+//
+//int main()
+//{
+//	return ft_strlen("dsdf");
+//}
