@@ -71,7 +71,6 @@ void	ft_putnbr_base(int nbr, char *base)
 	}
 	_ft_putnbr(nbr, len, base);
 }
-//
 //int main()
 //{
 //	ft_putnbr_base(2147483647,"01234567");
