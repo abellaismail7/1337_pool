@@ -10,53 +10,50 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_sqrt(int nb)
+int	ft_sqrt(int nb)
 {
-	int est;
-	int i;
+	int	est;
+	int	i;
 
 	if (nb < 1 )
-		return 0;
+		return (0);
 	est = 1 << 30;
-	while(est > nb)
+	while (est > nb)
 		est >>= 1;
-	
 	i = (est + nb / est) >> 1;
-	while(i < est)
+	while (i < est)
 	{
 		est = i;
 		i = (est + nb / est) >> 1;
 	}
-	return est;
+	return (est);
 }
 
 int	ft_is_prime(int nb)
 {
-	int i;
-	int sq;
+	int	i;
+	int	sq;
 
-	if(nb < 2)
-		return 0;
-	
+	if (nb < 2)
+		return (0);
 	sq = ft_sqrt(nb);
-
 	i = 2;
 	while (i <= sq)
 	{
-		if(nb % i == 0)
-			return 0;
+		if (nb % i == 0)
+			return (0);
 		i++;
 	}
-	return 1;
+	return (1);
 }
-
-#include<stdio.h>
-int main()
-{
-	for(int i = 0; i < 100; i++)
-	{
-		int a =ft_is_prime(i);
-		if (a)
-			printf("%d\n",i);
-	}
-}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	for(int i = 0; i < 1000; i++)
+//	{
+//		int a =ft_is_prime(i);
+//		if (a)
+//			printf("%d\n",i);
+//	}
+//}

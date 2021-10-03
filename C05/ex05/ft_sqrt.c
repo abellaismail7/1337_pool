@@ -12,56 +12,28 @@
 
 int	ft_sqrt(int nb)
 {
-	int est = 1 << 30;
-	int res = 0;
-
-
-	while(est > nb)
-		est >>= 2;
-
-	while(est)
-	{
-		if (nb >= res + est)
-		{
-			nb -= res + est;
-			res = (res >> 1) + est;
-		}
-		else
-			res >>= 1;
-		est >>= 2;
-	}
-	if(nb == 0)
-		return res;
-	else
-		return 0;
-}
-
-
-int ft_sqrt1(int nb)
-{
-	int est;
-	int i;
+	int	est;
+	int	nest;
 
 	if (nb < 1 )
-		return 0;
+		return (0);
 	est = 1 << 30;
-	while(est > nb)
+	while (est > nb)
 		est >>= 1;
-	
-	i = (est + nb / est) >> 1;
-	while(i < est)
+	nest = (est + nb / est) >> 1;
+	while (nest < est)
 	{
-		est = i;
-		i = (est + nb / est) >> 1;
+		est = nest;
+		nest = (est + nb / est) >> 1;
 	}
 	if (nb == est * est)
-		return est;
+		return (est);
 	else
-		return 0;
+		return (0);
 }
-
-#include<stdio.h>
-int main()
-{
-	printf("%d",ft_sqrt1(0));
-}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	printf("%d",ft_sqrt(1));
+//}

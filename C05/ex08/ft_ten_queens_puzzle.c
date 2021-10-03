@@ -10,109 +10,115 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		g_board_pos[10];
-int		counter;
+#include<unistd.h>
 
-int check_col(int c1, int r1,int c2, int r2)
+int		g_board_pos[10];
+int		g_counter;
+
+int	check_col(int c1, int r1, int c2, int r2)
 {
-	int c;
-	int r;
+	int	c;
+	int	r;
+
 	if (r1 == r2)
-		return 1;
+		return (1);
 	c = c1;
-    r = r1;
-	while(c < 10 && r < 10)
+	r = r1;
+	while (c < 10 && r < 10)
 	{
 		c++;
 		r++;
-		if(c == c2 && r == r2)
-			return 1;
+		if (c == c2 && r == r2)
+			return (1);
 	}
 	c = c1;
-    r = r1;
-	while(c >= 0 && r >= 0)
+	r = r1;
+	while (c >= 0 && r >= 0)
 	{
 		c++;
 		r--;
-		if(c == c2 && r == r2)
-			return 1;
+		if (c == c2 && r == r2)
+			return (1);
 	}
-	return 0;
+	return (0);
 }
 
-int check_tab(int n_col){
-	int i;
-	int j;
-	int size;
+int	check_tab(int n_col)
+{
+	int	i;
+	int	j;
+	int	size;
 
 	size = n_col + 1;
 	i = 0;
-	while(i < size)
+	while (i < size)
 	{
 		j = i + 1;
 		while (j < size)
 		{
-			if(check_col(i,g_board_pos[i],j,g_board_pos[j]))
+			if (check_col(i, g_board_pos[i], j, g_board_pos[j]))
 			{
-				return 0;
+				return (0);
 			}
 			j++;
 		}
 		i++;
 	}
-
-	return 1;
+	return (1);
 }
 
-#include<unistd.h>
-int _ft_len_queens_puzzle(int col)
+void	putboard(void)
 {
-	int i;
-	char c;
+	int		i;
+	char	c;
 
-	if(col == 10)
+	i = 0;
+	while (i < 10)
 	{
-		counter++;
-		i = 0;
-		while (i < 10)
-		{
-			c = g_board_pos[i++] + '0';
-			write(1, &c, 1);
-		}
-		write(1,"\n",1);
-		return 1;
+		c = g_board_pos[i++] + '0';
+		write(1, &c, 1);
+	}
+	write(1, "\n", 1);
+}
+
+int	_ft_len_queens_puzzle(int col)
+{
+	int		i;
+
+	if (col == 10)
+	{
+		g_counter++;
+		putboard();
+		return (1);
 	}
 	i = 0;
-	while(i < 10){
+	while (i < 10)
+	{
 		g_board_pos[col] = i;
-		if(check_tab(col))
+		if (check_tab(col))
 		{
-			if(!_ft_len_queens_puzzle(col+1))
-			{
-			    g_board_pos[col] = -1;
-			}
+			if (! _ft_len_queens_puzzle(col + 1))
+				g_board_pos[col] = -1;
 		}
-		else{
+		else
 			g_board_pos[col] = -1;
-		}
-		i++;	
-	
+		i++;
 	}
-
-    if (g_board_pos[col] == -1)
-        return 0;
-	return 1;
+	if (g_board_pos[col] == -1)
+		return (0);
+	return (1);
 }
-int ft_len_queens_puzzle(void)
+
+int	ft_len_queens_puzzle(void)
 {
-	counter = 0;
+	g_counter = 0;
 	_ft_len_queens_puzzle(0);
-	return counter;
+	return (g_counter);
 }
-
-#include<stdio.h>
-int main()
-{
-	printf("%d",ft_len_queens_puzzle());
-}
-
+//
+//#include<stdio.h>
+//int main()
+//{
+//	printf("%d",ft_len_queens_puzzle());
+//}
+//

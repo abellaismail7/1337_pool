@@ -10,57 +10,57 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_sqrt(int nb)
+int	ft_sqrt(int nb)
 {
-	int est;
-	int i;
+	int	est;
+	int	nest;
 
 	if (nb < 1 )
-		return 0;
+		return (0);
 	est = 1 << 30;
-	while(est > nb)
+	while (est > nb)
 		est >>= 1;
-	
-	i = (est + nb / est) >> 1;
-	while(i < est)
+	nest = (est + nb / est) >> 1;
+	while (nest < est)
 	{
-		est = i;
-		i = (est + nb / est) >> 1;
+		est = nest;
+		nest = (est + nb / est) >> 1;
 	}
-	return est;
+	return (est);
 }
 
 int	ft_is_prime(int nb)
 {
-	int i;
-	int sq;
+	int	i;
+	int	sq;
 
-	if(nb < 2)
-		return 0;
-	
+	if (nb < 2)
+		return (0);
 	sq = ft_sqrt(nb);
-
 	i = 2;
 	while (i <= sq)
 	{
-		if(nb % i == 0)
-			return 0;
+		if (nb % i == 0)
+			return (0);
 		i++;
 	}
-	return 1;
+	return (1);
 }
 
-int ft_find_next_prime(int nb)
+int	ft_find_next_prime(int nb)
 {
-
-	while(!ft_is_prime(nb))
+	if (nb < 2)
+	{
+		return (2);
+	}
+	while (!ft_is_prime(nb))
 		nb++;
-	return nb;	
+	return (nb);
 }
-
-#include<stdio.h>
-int main()
-{
-	int a =ft_find_next_prime(0);
-	printf("%d\n",a);
-}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	int a =ft_find_next_prime(12);
+//	printf("%d\n",a);
+//}

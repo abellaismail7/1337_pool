@@ -12,23 +12,21 @@
 
 int	ft_iterative_factorial(int nb)
 {
-	int res;
+	int	res;
 
 	res = 1;
-	if (nb <= 0)
+	if (nb < 0)
 		return (0);
 	while (nb)
 	{
-		res *= nb;	
+		res *= nb;
 		nb--;
 	}
 	return (res);
-	
 }
-
-#include<stdio.h>
-int main()
-{
-	
-	printf("%d", ft_iterative_factorial(7));
-}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	printf("%d", ft_iterative_factorial(2));
+//}

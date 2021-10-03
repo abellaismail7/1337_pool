@@ -6,7 +6,7 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:09:18 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/10/02 19:41:13 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/10/03 08:46:26 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ void	ft_putstr(char *str)
 	while (str[i])
 		i++;
 	write(1, str, i);
+}
+
+int main()
+{
+	ft_putstr("dsjkfj");
 }
