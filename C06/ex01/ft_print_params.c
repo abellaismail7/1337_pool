@@ -12,16 +12,16 @@
 
 #include<unistd.h>
 
-int main(int argc, char** argv)
+int	main(int argc, char **argv)
 {
-	int i;
-	int j;
-	char *str; 
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 1;
 	while (i < argc)
 	{
-		str = argv[i]; 
+		str = argv[i];
 		j = 0;
 		while (str[j])
 			j++;

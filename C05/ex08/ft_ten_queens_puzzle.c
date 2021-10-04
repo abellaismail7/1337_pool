@@ -115,10 +115,10 @@ int	ft_len_queens_puzzle(void)
 	_ft_len_queens_puzzle(0);
 	return (g_counter);
 }
-//
-//#include<stdio.h>
-//int main()
-//{
-//	printf("%d",ft_len_queens_puzzle());
-//}
-//
+
+#include<stdio.h>
+int main()
+{
+	printf("%d",ft_len_queens_puzzle());
+}
+
