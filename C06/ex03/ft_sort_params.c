@@ -28,7 +28,7 @@ void	put_args(int argc, char **argv)
 	int		j;
 	char	*str;
 
-	i = 0;
+	i = 1;
 	while (i < argc)
 	{
 		str = argv[i];

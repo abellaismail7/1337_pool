@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 		while (str[i])
 			i++;
 		write(1, str, i);
+		write(1, "\n", 1);
 	}
 }
