@@ -1,70 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 15:12:41 by iait-bel          #+#    #+#             */
+/*   Updated: 2021/10/06 15:12:42 by iait-bel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include<stdlib.h>
-#include<stdio.h>
 
-char *ft_strjoin(int size, char **strs, char *sep)
-{   
-    int count;
-    int sep_count;
-    int i;
-    int j;
-    char *result;
+int	count_join(int size, char **strs, char *sep)
+{
+	int		count;
+	int		sep_count;
+	int		i;
+	int		j;
 
-    
-    i = 0;
-    count = 0;
-    sep_count = 0;
-    while(sep[sep_count])
-        sep_count++;
-
-    while (i < size)
-    {
-        j = 0;
-        while (strs[i][j])
-        {
-            count++;
-            j++;
-        }
-        if (i != size -1)
-            count += sep_count;
-        i++;
-    }
-    count++;
-    result = malloc(sizeof(char) * count);
-   
-    i = 0;
-    count = 0;
-    while (i < size)
-    {
-        j = 0;
-        while (strs[i][j])
-        {
-            result[count++] = strs[i][j];
-            j++;
-        }
-        if (i != size -1)
-        {
-            j = 0;
-            while(sep[j])
-            {
-                result[count++] = sep[j++];
-            }
-        }
-        i++;
-    }
-
-    result[count] = 0;
-    
-    return result;
-
+	count = 0;
+	sep_count = 0;
+	i = 0;
+	while (sep[sep_count])
+		sep_count++;
+	while (i < size)
+	{
+		j = 0;
+		while (strs[i][j])
+		{
+			count++;
+			j++;
+		}
+		if (i != size - 1)
+			count += sep_count;
+		i++;
+	}
+	return (count);
 }
+
+char	*ft_strjoin(int size, char **strs, char *sep)
+{
+	int		count;
+	int		i;
+	int		j;
+	char	*result;
+
+	i = 0;
+	count = count_join(size, strs, sep) + 1;
+	result = malloc(sizeof(char) * count);
+	count = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (strs[i][j])
+			result[count++] = strs[i][j++];
+		if (i != size - 1)
+		{
+			j = 0;
+			while (sep[j])
+				result[count++] = sep[j++];
+		}
+		i++;
+	}
+	result[count] = 0;
+	return (result);
+}
+
+#include<stdio.h>
 // testi alklb
 int main()
 {
-    char *s = "\0abc\0edf\0poff";
+    char *s = "sdk\0jhk\0fdfjls";
 
-    char *strs[3] = {s,s+5,s+9};
+    char *strs[3] = {s,s+4,s+ 8};
 
-    char *str = ft_strjoin(3,strs,"--");
+    char *str = ft_strjoin(1,strs,"---");
     
     printf("%s", str);
 

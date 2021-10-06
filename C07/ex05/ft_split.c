@@ -16,7 +16,6 @@ int	has_char(char *str, char c)
 int split_counter(char *str, char *charset)
 {
     int i;
-    int j;
 	int count;
 
 	i = 0;
@@ -50,9 +49,6 @@ int word_counter(char *str, char *charset)
 }
 char **ft_split(char *str, char *charset)
 {
-   	if(!*str)
-		return 0;
-
 	char **result;
 	int spcount;
 	int wcount;
@@ -62,8 +58,10 @@ char **ft_split(char *str, char *charset)
 	while(has_char(charset, *str))
 		str++;
 	spcount = split_counter(str, charset);
-	
 	result = malloc(sizeof(char*) * (spcount + 1));
+	if(result)
+		return (0);
+
 	result[spcount] = 0;
 	i = 0;
 	while(i < spcount)
@@ -79,7 +77,7 @@ char **ft_split(char *str, char *charset)
 			j++;
 		}
 		str += j;
-		while(str[i] && has_char(charset, *str))
+		while(has_char(charset, *str))
 			str++;
 		i++;
 	}
@@ -92,12 +90,12 @@ int main()
     //int i = split_counter("kjd ,jkds, djsjkdl" , "d");
 	//return i;
 	int i = 0;
-    char **strs = ft_split(",  kjd ,jkds, djsjkdl,   , " , " ,");
+    char **strs = ft_split("          " , "   ");
 	if(!strs)
 		return 1;
 	while(strs[i])
 	{
-		printf("%s\n", strs[i]);
+		printf("--%s--\n", strs[i]);
 		free(strs[i]);
 		i++;
 	}
