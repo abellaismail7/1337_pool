@@ -6,7 +6,7 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 15:12:31 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/10/06 15:12:32 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/10/06 19:03:37 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ int	ft_range_ultimate(int **range, int min, int max)
 	}
 	return (size);
 }
-//#include<stdio.h>
-//int main()
-//{
-//	int *range;
-//	int s = ft_range_ultimate(&range,-15, -36);
-//	if (!range)
-//		return 9;
-//	while (s--)
-//	{
-//		printf("%d, ", range[s]);
-//	}
-//
-//	free(range);
-//}
+#include<stdio.h>
+int main()
+{
+	int *range;
+	int s = ft_range_ultimate(&range,-15, -36);
+	if (!range)
+		return 9;
+	while (s--)
+	{
+		printf("%d, ", range[s]);
+	}
+
+	free(range);
+}

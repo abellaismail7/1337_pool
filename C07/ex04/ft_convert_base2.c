@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convert_base2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 16:34:35 by iait-bel          #+#    #+#             */
+/*   Updated: 2021/10/06 19:42:28 by iait-bel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 int	validate(char *base)
 {
 	int	i;
 	int	j;
-    int is_space;
+	int	is_space;
 
 	i = 0;
 	while (base[i])
 	{
-        is_space = (base[i] >= '\t' && base[i] <= '\r') || base[i] == ' ';
+		is_space = ((base[i] >= '\t' && base[i] <= '\r') || base[i] == ' ');
 		if (base[i] == '+' || base[i] == '-' || is_space)
 			return (0);
 		j = i + 1;

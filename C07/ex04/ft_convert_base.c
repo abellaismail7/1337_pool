@@ -17,9 +17,9 @@ int	validate(char *base);
 
 int	ft_atoi_base(char *str, char *base, int len);
 
-int nbr_size(int nbr, int len)
+int	nbr_size(int nbr, int len)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (nbr)
@@ -27,8 +27,7 @@ int nbr_size(int nbr, int len)
 		nbr /= len;
 		i++;
 	}
-	
-	return i;
+	return (i);
 }
 
 char	*num_to_base(int nbr, char *base, int len)
@@ -52,20 +51,23 @@ char	*num_to_base(int nbr, char *base, int len)
 	return (result);
 }
 
-char *ft_convert_base(char *nbr, char *base_from, char *base_to)
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
-    int number;
-    int from_base_len = validate(base_from);
-    int to_base_len = validate(base_to);
-    if (from_base_len < 2 || to_base_len < 2)
-    	return (NULL);
-    number = ft_atoi_base(nbr, base_from, from_base_len);
-    return (num_to_base(number, base_to, to_base_len));
-}
+	int	number;
+	int	from_base_len;
+	int	to_base_len;
 
-int main()
-{
-	char *res = ft_convert_base("2147483647","0123456789","0123456789");
-    printf("%s", res);
-	free(res);
+	from_base_len = validate(base_from);
+	to_base_len = validate(base_to);
+	if (from_base_len < 2 || to_base_len < 2)
+		return (NULL);
+	number = ft_atoi_base(nbr, base_from, from_base_len);
+	return (num_to_base(number, base_to, to_base_len));
 }
+//
+//int main()
+//{
+//	char *res = ft_convert_base(" 5-5","0123456789","0123456789");
+//    printf("%s", res);
+//	free(res);
+//}

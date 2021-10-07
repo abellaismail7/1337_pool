@@ -66,18 +66,16 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	result[count] = 0;
 	return (result);
 }
-
-#include<stdio.h>
-// testi alklb
-int main()
-{
-    char *s = "sdk\0jhk\0fdfjls";
-
-    char *strs[3] = {s,s+4,s+ 8};
-
-    char *str = ft_strjoin(1,strs,"---");
-    
-    printf("%s", str);
-
-    free(str);
-}
+//#include<stdio.h>
+//int main()
+//{
+//    char *s = "sdk\0bjhk\0cdfjls";
+//
+//    char *strs[3] = {s,s+4,s+ 9};
+//
+//    char *str = ft_strjoin(0,strs,"");
+//    
+//    printf("%s", str);
+//
+//    free(str);
+//}
