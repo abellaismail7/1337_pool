@@ -65,10 +65,25 @@ int ft_atoi(char *str)
 	return res;
 }
 
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (src[i] && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+		dest[i++] = 0;
+	return (dest);
+}
+
 void tail_buf(int bufnb, int count)
 {
 	char *buf;
-	char c;
+	//char c;
 	int i;
 	int size;
 
@@ -76,12 +91,12 @@ void tail_buf(int bufnb, int count)
 	buf = malloc(sizeof(char) * size);
 
 	i = 0;
-	read(bufnb, &c, 1))
-	//while(read(bufnb, &c, 1))
-	//{
-	//	buf[i++] = c;
-	//}
+	while(read(bufnb, buf + count, count))
+	{
+		ft_strncpy(buf,buf + count,count); 
+	}
 
 	write(1, buf, count);
+	write(1, buf + count, count);
 	free(buf);
 }
