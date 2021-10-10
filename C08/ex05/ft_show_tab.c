@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_show_tab.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/10 11:16:37 by iait-bel          #+#    #+#             */
+/*   Updated: 2021/10/10 11:16:37 by iait-bel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include<stdlib.h>
 #include<unistd.h>
 #include"ft_stock_str.h"
 
-void print(char *str)
+void	print(char *str)
 {
-	int i;
-	i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i])
 		i++;
 	write(1, str, i);
@@ -48,12 +60,12 @@ void	ft_putnbr(int nb)
 	_ft_putnbr(nb);
 }
 
-void ft_show_tab(struct s_stock_str *par)
+void	ft_show_tab(struct s_stock_str *par)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(par[i].str[0])
+	while (par[i].str[0])
 	{
 		print(par[i].str);
 		ft_putnbr(par[i].size);
@@ -70,5 +82,3 @@ int main(int ac, char **av)
 	ft_show_tab(sts);
     free(sts);
 }
-
-

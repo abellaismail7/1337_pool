@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strs_to_tab.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/10 10:39:51 by iait-bel          #+#    #+#             */
+/*   Updated: 2021/10/10 10:39:51 by iait-bel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_stock_str.h"
 #include<stdlib.h>
 
@@ -38,6 +50,8 @@ struct	s_stock_str	*ft_strs_to_tab(int ac, char **av)
 	struct s_stock_str	*stocks;
 
 	stocks = malloc((ac + 1) * sizeof(struct s_stock_str));
+	if (!stocks)
+		return (NULL);
 	stocks[ac].str = "";
 	i = 0;
 	while (i < ac)
