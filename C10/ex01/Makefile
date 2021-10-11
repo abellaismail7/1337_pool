@@ -1,10 +1,10 @@
 CC 		= gcc
 CCFLAGS = -Wall -Werror -Wextra -I./include
 
-FILES 	= ft_tail util
+FILES 	= ft_cat util
 SRC		= $(FILES:=.c)
 OBJ		= $(FILES:=.o)
-EXEC	= ft_tail
+EXEC	= ft_cat
 B_DIR	= build
 B_OBJ	= $(addprefix $(B_DIR)/, $(OBJ))
 
