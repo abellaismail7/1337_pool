@@ -69,13 +69,23 @@ void	print_content_hexa(unsigned char *arr, int a)
 		write(1, " ", 1);
 		i++;
 	}
+
+	while(i < 16)
+	{
+		write(1, "   ", 3);
+		i++;
+	}
 }
 
 void	print_content(unsigned char *str, int a)
 {
 	int	i;
 	int	is_printable;
-
+	if (!a)
+	{
+		write(1, "\n", 1);
+		return;
+	}
 	write(1,"|", 1);
 	i = 0;
 	while (i < a)
