@@ -85,21 +85,22 @@ void tail_stdin(int count)
 	char *buf;
 	int i;
 	int j;
+	int size;
 	
-	buf = malloc(sizeof(char) * 30000);
+	size = count * 2;
+	buf = malloc(sizeof(char) * size);
 
 	i = 0;
 	while(1)
 	{
 		j = read(FT_STDIN, buf + count, count);
-		if(!j)
-			break;
 		i += j;
 		ft_strncpy(buf,buf + count,count); 
+		if(!j)
+			break;
 	}
 	if(!count)
 		return;
-
 	write(1, buf + (i % count), count);
 	free(buf);
 
@@ -122,10 +123,10 @@ void tail_buf(int bufnb, int count)
 	while(1)
 	{
 		j = read(bufnb, buf + count, count);
-		if(!j)
-			break;
 		i += j;
 		ft_strncpy(buf,buf + count,count); 
+		if(!j)
+			break;
 	}
 
 	write(1, buf + (i % count), count);

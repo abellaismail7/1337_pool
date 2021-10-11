@@ -6,7 +6,7 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 11:16:37 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/10/10 11:16:37 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/10/11 13:45:07 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_show_tab(struct s_stock_str *par)
 	int	i;
 
 	i = 0;
-	while (par[i].str[0])
+	while (par[i].str)
 	{
 		print(par[i].str);
 		ft_putnbr(par[i].size);
@@ -74,11 +74,11 @@ void	ft_show_tab(struct s_stock_str *par)
 		i++;
 	}
 }
-
-#include<stdio.h>
-int main(int ac, char **av)
-{
-	struct s_stock_str *sts = ft_strs_to_tab(ac, av);
-	ft_show_tab(sts);
-    free(sts);
-}
+//
+//#include<stdio.h>
+//int main(int ac, char **av)
+//{
+//	struct s_stock_str *sts = ft_strs_to_tab(ac, av);
+//	ft_show_tab(sts);
+//    free(sts);
+//}

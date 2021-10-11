@@ -6,14 +6,14 @@
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 10:01:32 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/10/10 10:01:32 by iait-bel         ###   ########.fr       */
+/*   Updated: 2021/10/11 13:44:48 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_POINT_H
 # define FT_POINT_H
 
-typedef struct t_point
+typedef struct s_point
 {
 	int	x;
 	int	y;
