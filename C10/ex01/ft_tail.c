@@ -46,6 +46,10 @@ int main(int ac, char **av)
 		{
 			// no arg for -c
 		}
+		else if(ac == 3)
+		{
+			tail_buf(FT_STDIN,count);
+		}
 		else {
 			i = 3;
 			while(av[i])

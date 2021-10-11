@@ -80,23 +80,54 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
+void tail_stdin(int count)
+{
+	char *buf;
+	int i;
+	int j;
+	
+	buf = malloc(sizeof(char) * 30000);
+
+	i = 0;
+	while(1)
+	{
+		j = read(FT_STDIN, buf + count, count);
+		if(!j)
+			break;
+		i += j;
+		ft_strncpy(buf,buf + count,count); 
+	}
+	if(!count)
+		return;
+
+	write(1, buf + (i % count), count);
+	free(buf);
+
+}
+
+
 void tail_buf(int bufnb, int count)
 {
 	char *buf;
-	//char c;
 	int i;
+	int j;
 	int size;
-
+	
+	if(!count)
+		return;
 	size = count * 2;
 	buf = malloc(sizeof(char) * size);
 
 	i = 0;
-	while(read(bufnb, buf + count, count))
+	while(1)
 	{
+		j = read(bufnb, buf + count, count);
+		if(!j)
+			break;
+		i += j;
 		ft_strncpy(buf,buf + count,count); 
 	}
 
-	write(1, buf, count);
-	write(1, buf + count, count);
+	write(1, buf + (i % count), count);
 	free(buf);
 }
