@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "util.h"
 
 int g_is_first = 1;
@@ -94,55 +93,40 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-void tail_stdin(int count)
+int ft_read(int bufnb, void *buf, int count)
 {
-	char *buf;
+	int cn;
 	int i;
-	int j;
-	int size;
-	
-	size = count * 2;
-	buf = malloc(sizeof(char) * size);
 
-	i = 0;
-	while(1)
-	{
-		j = read(FT_STDIN, buf + count, count);
-		i += j;
-		ft_strncpy(buf,buf + count,count); 
-		if(!j)
-			break;
+	cn = 0;
+	while(count != cn){
+		i = read(bufnb, buf+cn, count - cn); 
+		if(!i)
+			return cn;
+		cn += i;
 	}
-	if(!count)
-		return;
-	write(1, buf + (i % count), count);
-	free(buf);
-
+	return cn;
 }
-
 
 void tail_buf(int bufnb, int count)
 {
 	char *buf;
-	int i;
+	int bufcn;
 	int j;
-	int size;
 	
-	if(!count)
-		return;
-	size = count * 2;
-	buf = malloc(sizeof(char) * size);
-
-	i = 0;
+	buf = malloc(sizeof(char) * count * 2);
+	bufcn = 0;
 	while(1)
 	{
-		j = read(bufnb, buf + count, count);
-		i += j;
-		ft_strncpy(buf,buf + count,count); 
+		j = ft_read(bufnb, buf + count, count);
+		bufcn += j;
 		if(!j)
 			break;
+		ft_strncpy(buf, buf + count, j); 
 	}
-
-	write(1, buf + (i % count), count);
+	if(count > bufcn)
+		write(1, buf, bufcn);
+	else if(count)
+		write(1, buf + (bufcn % count), count);
 	free(buf);
 }

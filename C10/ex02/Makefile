@@ -19,6 +19,7 @@ $(B_DIR)/%.o: %.c
 
 clean:
 	rm $(B_OBJ)
+	rmdir $(B_DIR)
 
 fclean: clean
 	rm $(EXEC)
