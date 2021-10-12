@@ -1,7 +1,7 @@
 CC 		= gcc
 CCFLAGS = -Wall -Werror -Wextra -I./include
 
-FILES 	= ft_tail util
+FILES 	= ft_tail util ft_str
 SRC		= $(FILES:=.c)
 OBJ		= $(FILES:=.o)
 EXEC	= ft_tail
@@ -18,8 +18,8 @@ $(B_DIR)/%.o: %.c
 	$(CC) $(CCFLAGS) -o $@ -c $<
 
 clean:
-	rm $(B_OBJ)
-	rmdir $(B_DIR)
+	rm -f $(B_OBJ)
+	rm -rf $(B_DIR)
 
 fclean: clean
 	rm $(EXEC)

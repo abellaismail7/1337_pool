@@ -1,3 +1,4 @@
+#include<stdio.h>
 #include <errno.h>
 #include<stdio.h>
 #include <fcntl.h>
@@ -8,28 +9,44 @@
 #include "ft_str.h"
 #include "ft_hex.h"
 
-void dump_buf(int bufnb)
+int	ft_read(int bufnb, void *buf, int count)
 {
-	unsigned char bytes[16];
-	int i;
-	int j;
-	int add;
-	int rest;
+	int	cn;
+	int	i;
+
+	cn = 0;
+	while (!count || count != cn)
+	{
+		i = read(bufnb, buf + cn, count - cn + (count == 0));
+		if (!i)
+			return (cn);
+		cn += i;
+	}
+	return (cn);
+}
+
+void	dump_buf(int bufnb)
+{
+	unsigned char	bytes[16];
+	int				i;
+	int				j;
+	int				add;
+	int				rest;
 
 	add = 0;
 	j = 16;
-	while(1)
+	while (1)
 	{
 		rest = add % 16;
 		i = read(bufnb, bytes + rest, 16 - rest);
 		
-		if(rest + i == 16)
+		if (rest + i == 16)
 		{
 			ft_put_hexa((add/16) * 16);
 			ft_put_content_hexa(bytes, 16);
 			ft_put_content(bytes, 16);
 		}
-		else if(!i)
+		else if (!i)
 		{
 			ft_put_hexa((add/16) * 16);
 			ft_put_content_hexa(bytes, rest);
@@ -42,25 +59,74 @@ void dump_buf(int bufnb)
 	write(1, "\n", 1);
 }
 
-int dump_file(char *filename)
+int	open_file(char *filename)
 {
-	int fp;
-	char *str;
+	int		fp;
+	char	*str;
 	
 	errno = 0;
 	fp = open(filename, O_RDWR);
 	if (errno)
 	{
 		str = strerror(errno);
-		write(1, "ft_tail", 6);
-		write(1, str, ft_strlen(str));
+		write(2, "ft_hexdump :", 12);
+		write(2, filename, ft_strlen(filename));
+		write(2, " :", 2);
+		write(2, str, ft_strlen(str));
+		write(2, "\n", 1);
 		errno = 0;
-		return -1;
+		return (-1);
 	}
 	if (fp < 0)
-		return 0;
-	dump_buf(fp);
-
-	close(fp);
-	return 1;
+		return (-1);
+	return (fp);
 }
+
+void	dump_files(char **files, int size)
+{
+	int i;
+	int rest;
+	int cn;
+	int add;
+	int fp;
+	unsigned char bytes[16];
+
+	cn = 0;
+	rest = 0;
+	i = 0;
+	add = 0;
+	while (i < size){
+		int is_first = 1;
+		fp = open_file(files[i]);
+		while (fp > -1)
+		{
+			cn = ft_read(fp, bytes + (add % 16), 16 - (add % 16));	
+		printf("%s", files[i]);
+
+			if(cn == 0 || (cn < 16 && i != size - 1))
+			{
+				close(fp);
+				add += cn;
+				break;
+			}
+			else{
+				ft_put_hexa((add/16) * 16);
+				if(i == size -1 && (!is_first))
+				{
+					ft_put_content_hexa(bytes, cn);
+					ft_put_content(bytes, cn);
+				}
+				else
+				{
+					is_first = 0;
+					ft_put_content_hexa(bytes, 16);
+					ft_put_content(bytes, 16);
+				}
+			}
+			add += cn;
+		}
+		i++;
+	}
+	ft_put_hexa((add/16) * 16);
+}
+

@@ -1,7 +1,7 @@
 #ifndef UTIL_H
 # define UTIL_H
 
-int		dump_file(char *filename);
+void	dump_files(char **files, int size);
 void	dump_buf(int bufnb);
 
 # define FT_STDIN 0

@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "util.h"
+#include "ft_str.h"
 
 int main(int ac, char **av)
 {
@@ -12,10 +13,9 @@ int main(int ac, char **av)
 		dump_buf(FT_STDIN);
 	else if(ac > 1)
 	{
-		if(!ft_strcmp("-C", av[1]))
+		if(ft_strcmp("-C", av[1]) == 0)
 		{
-			while(i < ac)
-				dump_file(av[i++]);
+			dump_files(av + 2, ac - 2);
 		}
 	}
 }
