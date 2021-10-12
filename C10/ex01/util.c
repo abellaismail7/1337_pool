@@ -23,11 +23,11 @@ int print_file(char *filename)
 	if (errno)
 	{
 		str = strerror(errno);
-		write(1, "ft_cat: ", 8);
-		write(1, filename, ft_strlen(filename));
-		write(1, ": ", 2);
-		write(1, str, ft_strlen(str));
-		write(1, "\n", 1);
+		write(2, "ft_cat: ", 8);
+		write(2, filename, ft_strlen(filename));
+		write(2, ": ", 2);
+		write(2, str, ft_strlen(str));
+		write(2, "\n", 1);
 		errno = 0;
 		return 1;
 	}

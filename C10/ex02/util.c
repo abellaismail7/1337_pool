@@ -3,7 +3,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "util.h"
+
+int g_is_first = 1;
 
 int ft_strlen(char *str)
 {
@@ -19,28 +22,33 @@ int tail_file(char *filename, int count, int is_multi)
 {
 	int fp;
 	char *str;
-	
+
 	errno = 0;
 	fp = open(filename, O_RDWR);
-	if (errno)
+	if (errno && errno != EISDIR)
 	{
 		str = strerror(errno);
-		write(1, "ft_tail", 6);
-		write(1, str, ft_strlen(str));
-		errno = 0;
+		write(2, "ft_tail: ", 9);
+		write(2, filename, ft_strlen(filename));
+		write(2, ": ", 2);
+		write(2, str, ft_strlen(str));
+		write(2, "\n", 1);
 		return -1;
 	}
-	if (fp < 0)
-		return 0;
 	if(is_multi)
 	{
-		write(1, "==> ", 4);
+		str = "\n==> ";
+		write(1, str + g_is_first, 4 + !g_is_first);
 		write(1, filename, ft_strlen(filename));
 		write(1, " <==\n", 5);
 	}
-	tail_buf(fp, count);
-	close(fp);
-	return 1;
+	g_is_first = 0;
+	if(!errno)
+	{
+		tail_buf(fp, count);
+		close(fp);
+	}
+	return fp < 0;
 }
 
 int	ft_strcmp(char *s1, char *s2)
