@@ -1,11 +1,8 @@
 #ifndef UTIL_H
 # define UTIL_H
 
-int	ft_strlen(char *str);
-int	dump_file(char *filename);
+int		dump_file(char *filename);
 void	dump_buf(int bufnb);
-int	ft_strcmp(char *s1, char *s2);
-int ft_atoi(char *str);
 
 # define FT_STDIN 0
 # define FT_ERR_NO_ARG -1

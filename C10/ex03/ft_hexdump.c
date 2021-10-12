@@ -8,7 +8,7 @@ int main(int ac, char **av)
 	int i;
 
 	i = 2;
-	if(ac == 1)
+	if(ac < 3)
 		dump_buf(FT_STDIN);
 	else if(ac > 1)
 	{

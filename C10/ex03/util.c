@@ -4,120 +4,42 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <util.h>
-
-int ft_strlen(char *str)
-{
-	int i;
-
-	i= 0;
-	while(str[i])
-		i++;
-	return i;
-}
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
-}
-void	print_hexa(unsigned long nb)
-{
-	char	c;
-	int		i;
-
-	i = 16 * 2;
-	while (i)
-	{
-		i -= 4;
-		c = nb >> i;
-		c = c & 0xf;
-		if (c > 9)
-			c += 'a' - 10;
-		else
-			c += '0';
-		write(1, &c, 1);
-	}
-}
-
-void	print_content_hexa(unsigned char *arr, int a)
-{
-	int	left;
-	int	shift;
-	int	i;
-
-	write(1, "  ", 2);
-	i = 0;
-	while (i < a)
-	{
-		shift = 4;
-		while (shift >= 0)
-		{
-			left = arr[i] >> shift & 0xf;
-			if (left > 9)
-				left += 'a' - 10;
-			else
-				left += '0';
-			write(1, &left, 1);
-			shift -= 4;
-		}
-		if (i == 7)
-			write(1, " ", 1);
-		write(1, " ", 1);
-		i++;
-	}
-
-	while(i < 16)
-	{
-		write(1, "   ", 3);
-		i++;
-	}
-}
-
-void	print_content(unsigned char *str, int a)
-{
-	int	i;
-	int	is_printable;
-	if (!a)
-	{
-		write(1, "\n", 1);
-		return;
-	}
-	write(1,"|", 1);
-	i = 0;
-	while (i < a)
-	{
-		is_printable = str[i] > 31 && str[i] < 127;
-		if (is_printable)
-			write(1, str + i, 1);
-		else
-			write(1, ".", 1);
-		i++;
-	}
-	write(1,"|", 1);
-	write(1,"\n", 1);
-}
+#include "util.h"
+#include "ft_str.h"
+#include "ft_hex.h"
 
 void dump_buf(int bufnb)
 {
 	unsigned char bytes[16];
 	int i;
+	int j;
 	int add;
+	int rest;
 
 	add = 0;
+	j = 16;
 	while(1)
 	{
-		i = read(bufnb, bytes, 16);
-		print_hexa(add);
-		print_content_hexa(bytes, i);
-		print_content(bytes, i);
-		if(!i)
+		rest = add % 16;
+		i = read(bufnb, bytes + rest, 16 - rest);
+		
+		if(rest + i == 16)
+		{
+			ft_put_hexa((add/16) * 16);
+			ft_put_content_hexa(bytes, 16);
+			ft_put_content(bytes, 16);
+		}
+		else if(!i)
+		{
+			ft_put_hexa((add/16) * 16);
+			ft_put_content_hexa(bytes, rest);
+			ft_put_content(bytes, rest);
+			ft_put_hexa(add);
 			break;
+		}
 		add += i;
 	}
+	write(1, "\n", 1);
 }
 
 int dump_file(char *filename)
