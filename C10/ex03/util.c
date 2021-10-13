@@ -121,7 +121,7 @@ int	dump_files(char **files, int size)
 	}
 	if (add != 0)
 	{
-		if(rest > 1)
+		if(rest > 0)
 			put_dump_line(add, g_bytes, rest);
 		ft_put_hexa(add);
 		write(1, "\n", 1);

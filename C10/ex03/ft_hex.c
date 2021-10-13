@@ -72,10 +72,7 @@ void	ft_put_content_hexa(unsigned char *str, int size)
 		i++;
 	}
 	while (i < 16)
-	{
-		write(1, "   ", 3);
-		i++;
-	}
+		write(1, "    ", 3 + (i++ == 7));
 }
 
 void	ft_put_content(unsigned char *str, int size)
