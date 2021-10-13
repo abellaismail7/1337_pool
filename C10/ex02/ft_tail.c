@@ -27,12 +27,13 @@ int	get_count(int ac, char **av)
 	return (0);
 }
 
-void	show_error(char *msg, char *arg)
+int	show_error(char *msg, char *arg)
 {
 	write(2, "ft_tail: ", 9);
 	write(2, msg, ft_strlen(msg));
 	write(2, arg, ft_strlen(arg));
 	write(2, "\n", 1);
+	return 1;
 }
 
 void	show_help(int out)
@@ -45,17 +46,20 @@ int	main(int ac, char **av)
 {
 	int	i;
 	int	count;
+	int j;
 
 	count = 0;
+	j = 0;
 	if (ac > 1)
 	{
 		count = get_count(ac, av);
 		if (count == FT_ERR_ILLEGAL_OFFSET)
-			show_error("illegal offset -- ", av[2]);
+			return show_error("illegal offset -- ", av[2]);
 		else if (count == FT_ERR_NO_ARG)
 		{
 			show_error("option requires an argument -- ", "c");
 			show_help(1);
+			return 1;
 		}
 		else if (ac == 3)
 			tail_buf(FT_STDIN, count);
@@ -63,7 +67,8 @@ int	main(int ac, char **av)
 		{
 			i = 3;
 			while (av[i])
-				tail_file(av[i++], count, ac > 4);
+				j |= tail_file(av[i++], count, ac > 4);
 		}
 	}
+	return j;
 }

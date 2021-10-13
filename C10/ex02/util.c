@@ -30,7 +30,7 @@ int	show_errno(char *filename)
 	write(2, ": ", 2);
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 1);
-	return (-1);
+	return (1);
 }
 
 int	tail_file(char *filename, int count, int is_multi)
@@ -55,7 +55,7 @@ int	tail_file(char *filename, int count, int is_multi)
 		tail_buf(fp, count);
 		close(fp);
 	}
-	return (fp < 0);
+	return (fp < 0 && errno != EISDIR);
 }
 
 int	ft_read(int bufnb, void *buf, int count)
