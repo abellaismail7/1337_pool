@@ -18,9 +18,10 @@ $(B_DIR)/%.o: %.c
 	$(CC) $(CCFLAGS) -o $@ -c $<
 
 clean:
-	rm $(B_OBJ)
+	rm -f $(B_OBJ)
+	rm -rf $(B_DIR)
 
 fclean: clean
-	rm $(EXEC)
+	rm -f $(EXEC)
 
 .PHONY: all clean fclean all
