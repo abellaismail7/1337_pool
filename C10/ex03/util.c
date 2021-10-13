@@ -96,37 +96,27 @@ void	dump_files(char **files, int size)
 	i = 0;
 	add = 0;
 	while (i < size){
-		int is_first = 1;
 		fp = open_file(files[i]);
 		while (fp > -1)
 		{
-			cn = ft_read(fp, bytes + (add % 16), 16 - (add % 16));	
-		printf("%s", files[i]);
+			rest = add % 16;
+			cn = read(fp, bytes + rest, 16 - rest);	
 
-			if(cn == 0 || (cn < 16 && i != size - 1))
+			if(cn == 0)
 			{
 				close(fp);
-				add += cn;
 				break;
 			}
-			else{
-				ft_put_hexa((add/16) * 16);
-				if(i == size -1 && (!is_first))
-				{
-					ft_put_content_hexa(bytes, cn);
-					ft_put_content(bytes, cn);
-				}
-				else
-				{
-					is_first = 0;
-					ft_put_content_hexa(bytes, 16);
-					ft_put_content(bytes, 16);
-				}
+
+			if (rest + cn  == 16){
+				ft_put_hexa(add);
+				ft_put_content_hexa(bytes, rest + cn);
+				ft_put_content(bytes, rest + cn);
 			}
 			add += cn;
 		}
 		i++;
 	}
-	ft_put_hexa((add/16) * 16);
+	ft_put_hexa(add + cn);
 }
 
