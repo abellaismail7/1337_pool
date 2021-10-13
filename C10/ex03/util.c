@@ -87,9 +87,13 @@ int	dump_file(int *add, int fp)
 	while (fp > -1)
 	{
 		rest = *add % 16;
+		g_bytes[rest] += 1;
 		cn = ft_read(fp, g_bytes + rest, 16 - rest);
-		if (cn == 0 && close(fp) == 0)
+		if (cn == 0)
+		{
+			close(fp);
 			break ;
+		}
 		if (rest + cn == 16)
 			put_dump_line(*add, g_bytes, rest + cn);
 		*add += cn;
@@ -117,8 +121,10 @@ int	dump_files(char **files, int size)
 	}
 	if (add != 0)
 	{
-		put_dump_line(add, g_bytes, rest);
+		if(rest > 1)
+			put_dump_line(add, g_bytes, rest);
 		ft_put_hexa(add);
+		write(1, "\n", 1);
 	}
 	return (res);
 }

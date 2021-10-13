@@ -33,6 +33,5 @@ int	main(int ac, char **av)
 				j |= dump_files(av + 2, ac - 2);
 		}
 	}
-	write(1, "\n", 1);
 	return (j);
 }
