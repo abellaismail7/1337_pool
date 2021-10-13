@@ -1,0 +1,6 @@
+Credentials cache: API:C4A4EF5B-C0E5-47FF-9E3F-B05D26132BBE
+        Principal: iait-bel@1337.MA
+
+  Issued                Expires               Principal
+Sep 21 07:49:04 2021  Sep 21 17:49:04 2021  krbtgt/1337.MA@1337.MA
+Sep 21 07:49:06 2021  Sep 21 17:49:04 2021  HTTP/iscsi.1337.ma@1337.MA
