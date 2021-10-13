@@ -20,12 +20,13 @@
 
 int	g_is_first = 1;
 
-int	show_errno(char *filename)
+int	show_errno(char *filename, char *basename)
 {
 	char	*str;
 
 	str = strerror(errno);
-	write(2, "ft_tail: ", 9);
+	write(2, basename, ft_strlen(basename));
+	write(2, ": ", 2);
 	write(2, filename, ft_strlen(filename));
 	write(2, ": ", 2);
 	write(2, str, ft_strlen(str));
@@ -33,7 +34,7 @@ int	show_errno(char *filename)
 	return (1);
 }
 
-int	tail_file(char *filename, int count, int is_multi)
+int	tail_file(char *filename, int count, int is_multi, char *basename)
 {
 	int		fp;
 	char	*str;
@@ -41,7 +42,7 @@ int	tail_file(char *filename, int count, int is_multi)
 	errno = 0;
 	fp = open(filename, O_RDWR);
 	if (errno && errno != EISDIR)
-		return (show_errno(filename));
+		return (show_errno(filename, basename));
 	if (is_multi)
 	{
 		str = "\n==> ";

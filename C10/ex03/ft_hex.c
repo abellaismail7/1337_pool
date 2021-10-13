@@ -28,12 +28,12 @@ int	ft_read(int bufnb, void *buf, int count)
 	return (cn);
 }
 
-void	ft_put_hexa(unsigned long nb)
+void	ft_put_hexa(unsigned long nb, int cols)
 {
 	char	c;
 	int		i;
 
-	i = 16 * 2;
+	i = 16 * 2 - (cols == 2) * 4;
 	while (i)
 	{
 		i -= 4;
@@ -47,13 +47,13 @@ void	ft_put_hexa(unsigned long nb)
 	}
 }
 
-void	ft_put_content_hexa(unsigned char *str, int size)
+void	ft_put_content_hexa(unsigned char *str, int size, int cols)
 {
 	int	left;
 	int	shift;
 	int	i;
 
-	write(1, "  ", 2);
+	write(1, " ", 1);
 	i = 0;
 	while (i < size)
 	{
@@ -68,34 +68,33 @@ void	ft_put_content_hexa(unsigned char *str, int size)
 			write(1, &left, 1);
 			shift -= 4;
 		}
-		write(1, "  ", 1 + (i == 7));
+		write(1, "  ", (i != size - 1 || cols != 2) + (i == 7 && cols == 3));
 		i++;
 	}
 	while (i < 16)
-		write(1, "    ", 3 + (i++ == 7));
+		write(1, "    ", 3 + (i++ == 7 && cols == 3));
 }
 
 void	ft_put_content(unsigned char *str, int size)
 {
 	int	i;
 	int	is_printable;
+
 	if (!size)
 	{
 		write(1, "\n", 1);
-		return;
+		return ;
 	}
-	write(1," |", 2);
+	write(1, " |", 2);
 	i = 0;
 	while (i < size)
 	{
-		is_printable = str[i] > 31 && str[i] < 127;
+		is_printable = (str[i] > 31 && str[i] < 127);
 		if (is_printable)
 			write(1, str + i, 1);
 		else
 			write(1, ".", 1);
 		i++;
 	}
-	write(1,"|", 1);
-	write(1,"\n", 1);
+	write(1, "|", 1);
 }
-

@@ -1,5 +1,5 @@
 CC 		= gcc
-CCFLAGS = -Wall -Werror -Wextra -I./include
+CCFLAGS = -Wall -Werror -Wextra -I./includes
 
 FILES 	= ft_hexdump util ft_str ft_hex
 SRC		= $(FILES:=.c)

@@ -1,5 +1,5 @@
 CC 		= gcc
-CCFLAGS = -Wall -Werror -Wextra -I./include
+CCFLAGS = -Wall -Werror -Wextra -I./includes
 
 FILES 	= ft_tail util ft_str
 SRC		= $(FILES:=.c)
@@ -22,6 +22,6 @@ clean:
 	rm -rf $(B_DIR)
 
 fclean: clean
-	rm $(EXEC)
+	rm -f $(EXEC)
 
 .PHONY: all clean fclean all

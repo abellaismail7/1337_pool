@@ -39,22 +39,21 @@ int	ft_strncmp(unsigned char *s1, unsigned char *s2, unsigned int n)
 		return (0);
 	i = 0;
 	j = n - 1;
-	while (s1[i] && s1[i] == s2[i] && i < j)
+	while (s1[i] == s2[i] && i < j)
 		i++;
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-unsigned char	*ft_strncpy(unsigned char *dest, unsigned char *src, unsigned int n)
+unsigned char	*ft_strncpy(unsigned char *dest,
+	unsigned char *src, unsigned int n)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (src[i] && i < n)
+	while (i < n)
 	{
 		dest[i] = src[i];
 		i++;
 	}
-	while (i < n)
-		dest[i++] = 0;
 	return (dest);
 }
