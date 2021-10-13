@@ -12,6 +12,22 @@
 
 #include<unistd.h>
 
+int	ft_read(int bufnb, void *buf, int count)
+{
+	int	cn;
+	int	i;
+
+	cn = 0;
+	while (!count || count != cn)
+	{
+		i = read(bufnb, buf + cn, count - cn + (count == 0));
+		if (!i)
+			return (cn);
+		cn += i;
+	}
+	return (cn);
+}
+
 void	ft_put_hexa(unsigned long nb)
 {
 	char	c;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 09:42:49 by iait-bel          #+#    #+#             */
+/*   Updated: 2021/10/13 09:42:49 by iait-bel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include<stdio.h>
 #include <errno.h>
 #include<stdio.h>
@@ -9,61 +21,28 @@
 #include "ft_str.h"
 #include "ft_hex.h"
 
-int	ft_read(int bufnb, void *buf, int count)
-{
-	int	cn;
-	int	i;
+int	dump_file(int *add, int fp);
+void	put_dump_line(int add, unsigned char *bytes, int index);
+unsigned char	g_bytes[16];
+unsigned char	g_prev_bytes[16];
+int				g_is_same = 0;
 
-	cn = 0;
-	while (!count || count != cn)
-	{
-		i = read(bufnb, buf + cn, count - cn + (count == 0));
-		if (!i)
-			return (cn);
-		cn += i;
-	}
-	return (cn);
-}
-
-void	dump_buf(int bufnb)
+void	dump_buf()
 {
-	unsigned char	bytes[16];
-	int				i;
-	int				j;
-	int				add;
-	int				rest;
+	int	add;
+	int rest;
 
 	add = 0;
-	j = 16;
-	while (1)
-	{
-		rest = add % 16;
-		i = read(bufnb, bytes + rest, 16 - rest);
-		
-		if (rest + i == 16)
-		{
-			ft_put_hexa((add/16) * 16);
-			ft_put_content_hexa(bytes, 16);
-			ft_put_content(bytes, 16);
-		}
-		else if (!i)
-		{
-			ft_put_hexa((add/16) * 16);
-			ft_put_content_hexa(bytes, rest);
-			ft_put_content(bytes, rest);
-			ft_put_hexa(add);
-			break;
-		}
-		add += i;
-	}
-	write(1, "\n", 1);
+	rest = dump_file(&add, FT_STDIN);
+	put_dump_line(add, g_bytes, rest);
+	ft_put_hexa(add);
 }
 
 int	open_file(char *filename)
 {
 	int		fp;
 	char	*str;
-	
+
 	errno = 0;
 	fp = open(filename, O_RDWR);
 	if (errno)
@@ -82,41 +61,64 @@ int	open_file(char *filename)
 	return (fp);
 }
 
-void	dump_files(char **files, int size)
+void	put_dump_line(int add, unsigned char *bytes, int index)
 {
-	int i;
-	int rest;
-	int cn;
-	int add;
-	int fp;
-	unsigned char bytes[16];
-
-	cn = 0;
-	rest = 0;
-	i = 0;
-	add = 0;
-	while (i < size){
-		fp = open_file(files[i]);
-		while (fp > -1)
-		{
-			rest = add % 16;
-			cn = read(fp, bytes + rest, 16 - rest);	
-
-			if(cn == 0)
-			{
-				close(fp);
-				break;
-			}
-
-			if (rest + cn  == 16){
-				ft_put_hexa(add);
-				ft_put_content_hexa(bytes, rest + cn);
-				ft_put_content(bytes, rest + cn);
-			}
-			add += cn;
-		}
-		i++;
+	if (ft_strncmp(bytes, g_prev_bytes, 16) == 0)
+	{
+		if (!g_is_same)
+			write(1, "*\n", 2);
+		g_is_same = 1;
 	}
-	ft_put_hexa(add + cn);
+	else
+	{
+		g_is_same = 0;
+		ft_put_hexa(add / 16 * 16);
+		ft_put_content_hexa(bytes, index);
+		ft_put_content(bytes, index);
+	}
+	ft_strncpy(g_prev_bytes, bytes, 16);
 }
 
+int	dump_file(int *add, int fp)
+{
+	int	cn;
+	int	rest;
+
+	while (fp > -1)
+	{
+		rest = *add % 16;
+		cn = ft_read(fp, g_bytes + rest, 16 - rest);
+		if (cn == 0 && close(fp) == 0)
+			break ;
+		if (rest + cn == 16)
+			put_dump_line(*add, g_bytes, rest + cn);
+		*add += cn;
+	}
+	return (rest);
+}
+
+int	dump_files(char **files, int size)
+{
+	int				i;
+	int				rest;
+	int				add;
+	int				fp;
+	int				res;
+
+	i = 0;
+	add = 0;
+	res = 0;
+	while (i < size)
+	{
+		fp = open_file(files[i]);
+		res |= fp < 0;
+		rest = dump_file(&add, fp);
+		i++;
+	}
+	if (add != 0)
+	{
+		put_dump_line(add, g_bytes, rest);
+		ft_put_hexa(add);
+	}
+	return (res);
+}
