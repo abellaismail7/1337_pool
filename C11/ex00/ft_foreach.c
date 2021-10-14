@@ -10,17 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_foreach(int *tab, int length, void(*f)(int));
-
-void ft_foreach(int *tab, int length, void(*f)(int))
+void	ft_foreach(int *tab, int length, void (*f)(int))
 {
-	int i;
+	int	i;
 
+	if (tab == 0)
+		return ;
 	i = 0;
-	while(i < length)
+	while (i < length)
 	{
 		(*f)(tab[i]);
 		i++;
 	}
 }
-
+//
+//#include<stdio.h>
+//void print(int a)
+//{
+//	printf("%d\n", a * 2);
+//}
+//int main()
+//{
+//	int a[] = {-303992, 405422, 59222, -149444, 109342};
+//	ft_foreach(a , 3, print);
+//		
+//}

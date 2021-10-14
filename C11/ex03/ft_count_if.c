@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_count_if(char **tab, int length, int(*f)(char*))
+int	ft_count_if(char **tab, int length, int (*f)(char*))
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -23,6 +23,17 @@ int ft_count_if(char **tab, int length, int(*f)(char*))
 			count++;
 		i++;
 	}
-	return count;
+	return (count);
 }
-
+//
+//#include<stdio.h>
+//int is_even(char *a)
+//{
+//	return a[0] == 'z';
+//}
+//int main()
+//{
+//	char *a[] = {"ssda", "sada", "ssd", "ssdsf"};
+//	printf("%d", ft_count_if(a, 4, is_even));
+//		
+//}

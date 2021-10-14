@@ -13,7 +13,7 @@
 #ifndef FT_NBR_H
 # define FT_NBR_H
 
-int 	ft_atoi(char *str);
+int		ft_atoi(char *str);
 void	ft_putnbr(int nb);
 
 #endif

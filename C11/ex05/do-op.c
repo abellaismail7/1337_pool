@@ -12,25 +12,23 @@
 #include "ft_nbr.h"
 #include "ft_operators.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int val1;
-	int val2;
-	char operator;
-	int res;
-	
+	int		val1;
+	int		val2;
+	char	operator;
+	int		res;
+
 	res = 0;
-	if(ac == 4)
+	if (ac == 4)
 	{
 		val1 = ft_atoi(av[1]);
 		operator = av[2][0];
 		val2 = ft_atoi(av[3]);
 		if (check_zero(operator, val2) == 0)
-			return 1;
-
-		res = calc(operator, val1, val2);
-		
+			return (1);
+		if (av[2][1] == 0)
+			res = calc(operator, val1, val2);
+		ft_putnbr(res);
 	}
-	ft_putnbr(res);
-
 }

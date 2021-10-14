@@ -1,7 +1,7 @@
 CC 		= gcc
 CCFLAGS = -Wall -Werror -Wextra -I./includes
 
-FILES 	= do-op ft_nbr ft_operators
+FILES 	= do-op ft_nbr ft_operators ft_calc
 SRC		= $(FILES:=.c)
 OBJ		= $(FILES:=.o)
 EXEC	= do-op

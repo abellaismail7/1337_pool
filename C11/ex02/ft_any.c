@@ -10,18 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-int ft_any(char **tab, int(*f)(char*))
+int	ft_any(char **tab, int (*f)(char*))
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
 	{
-		if ((*f)(tab[i]) == 0)
-			return 0;
+		if ((*f)(tab[i]) != 0)
+			return (1);
 		i++;
 	}
-	return 1;
+	return (0);
 }
-
+//
+//#include<stdio.h>
+//int is_even(char *a)
+//{
+//	return a[0] == 's';
+//}
+//int main()
+//{
+//	char *a[] = {0};
+//	printf("%d", ft_any(a, is_even));
+//		
+//}
