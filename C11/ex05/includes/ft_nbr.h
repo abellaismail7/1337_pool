@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do-op.c                                            :+:      :+:    :+:   */
+/*   ft_nbr.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iait-bel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 20:37:44 by iait-bel          #+#    #+#             */
-/*   Updated: 2021/10/13 20:37:44 by iait-bel         ###   ########.fr       */
+/*   Created: 2021/10/14 08:37:19 by iait-bel          #+#    #+#             */
+/*   Updated: 2021/10/14 08:37:19 by iait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_nbr.h"
-#include "ft_operators.h"
 
-int main(int ac, char **av)
-{
-	int val1;
-	int val2;
-	char operator;
-	int res;
-	
-	res = 0;
-	if(ac == 4)
-	{
-		val1 = ft_atoi(av[1]);
-		operator = av[2][0];
-		val2 = ft_atoi(av[3]);
-		if (check_zero(operator, val2) == 0)
-			return 1;
+#ifndef FT_NBR_H
+# define FT_NBR_H
 
-		res = calc(operator, val1, val2);
-		
-	}
-	ft_putnbr(res);
+int 	ft_atoi(char *str);
+void	ft_putnbr(int nb);
 
-}
+#endif

@@ -10,6 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include<unistd.h>
+
+void ft_puterr(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+		i++;
+	write(2, str, i);
+}
+
+int check_zero(char operator, int val)
+{
+	if (val != 0)
+		return (1);
+	if (operator == '%')
+	{
+		ft_puterr("Stop : modulo by zero\n");
+		return (0);
+	}
+	if (operator == '/')
+	{
+		ft_puterr("Stop : division by zero\n");
+		return (0);
+	}
+	return (1);
+}
 
 int add(int a, int b)
 {
@@ -21,17 +49,32 @@ int subtract(int a, int b)
 	return a - b;
 }
 
-int multi(int a, int b);
+int multi(int a, int b)
 {
 	return a * b;
 }
 
-int div(int a, int b);
+int div(int a, int b)
 {
 	return a / b;
 }
 
-int mod(int a, int b);
+int mod(int a, int b)
 {
 	return a % b;
+}
+
+int calc(char operator, int a, int b)
+{
+		if (operator == '+')
+			return add(a,b);
+		else if(operator == '-')
+			return subtract(a,b);
+		else if(operator == '*')
+			return multi(a,b);
+		else if(operator == '/')
+			return div(a,b);
+		else if(operator == '%')
+			return mod(a,b);
+		return 0;
 }
