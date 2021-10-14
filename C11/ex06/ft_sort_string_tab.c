@@ -43,13 +43,14 @@ void	ft_sort_string_tab(char **tab)
 		i++;
 	}
 }
-
-#include<stdio.h>
-int main()
-{
-	char *a [] = {"ab","de", "zop","sds"};
-	ft_sort_string_tab(a);
-
-	for(int i = 0 i < 4; i++)
-		printf("%s", a[i]);
-}
+//
+//#include<stdio.h>
+//int main()
+//{
+//	char *a [] = { "", "3", "qyPi", "6O9", "", "ntXJkl", "suadwnNKW", 0};
+//	ft_sort_string_tab(a);
+//
+//	for(int i = 0; i < 7; i++)
+//		printf("%s\n", a[i]);
+//}
+//
