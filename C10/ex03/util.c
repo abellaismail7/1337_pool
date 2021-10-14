@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
-#include <errno.h>
-#include<stdio.h>
+//#include<stdio.h>
 #include <fcntl.h>
-#include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "util.h"
 #include "ft_str.h"
 #include "ft_hex.h"
+#include "ft_error.h"
 
-int				dump_file(int *add, int fp, int cols);
+void			dump_file(int *add, int fp, int cols);
 void			put_dump_line(int add, unsigned char *bytes,
 					int index, int cols);
 unsigned char	g_bytes[16];
@@ -31,14 +30,13 @@ int				g_is_same = 0;
 void	dump_buf(int cols)
 {
 	int	add;
-	int	rest;
 
 	add = 0;
-	rest = dump_file(&add, FT_STDIN, cols);
+	dump_file(&add, FT_STDIN, cols);
 	if (add != 0)
 	{
-		if (rest > 0)
-			put_dump_line(add, g_bytes, rest, cols);
+		if (add % 16 > 0)
+			put_dump_line(add, g_bytes, add % 16, cols);
 		ft_put_hexa(add, cols);
 		write(1, "\n", 1);
 	}
@@ -47,24 +45,10 @@ void	dump_buf(int cols)
 int	open_file(char *filename, char *basename)
 {
 	int		fp;
-	char	*str;
 
 	errno = 0;
 	fp = open(filename, O_RDWR);
-	if (errno)
-	{
-		str = strerror(errno);
-		write(2, basename, ft_strlen(basename));
-		write(2, ": ", 2);
-		write(2, filename, ft_strlen(filename));
-		write(2, " :", 2);
-		write(2, str, ft_strlen(str));
-		write(2, "\n", 1);
-		errno = 0;
-		return (-1);
-	}
-	if (fp < 0)
-		return (-1);
+	show_errno(basename, filename);
 	return (fp);
 }
 
@@ -90,35 +74,32 @@ void	put_dump_line(int add, unsigned char *bytes, int index, int cols)
 	ft_strncpy(g_prev_bytes, bytes, 16);
 }
 
-int	dump_file(int *add, int fp, int cols)
+void	dump_file(int *add, int fp, int cols)
 {
 	int	cn;
 	int	rest;
 
+	rest = 0;
 	while (fp > -1)
 	{
 		rest = *add % 16;
 		g_bytes[rest] += 1;
 		cn = ft_read(fp, g_bytes + rest, 16 - rest);
 		if (cn == 0)
-		{
-			close(fp);
 			break ;
-		}
 		if (rest + cn == 16)
 			put_dump_line(*add, g_bytes, rest + cn, cols);
 		*add += cn;
 	}
-	return (rest);
+	close(fp);
 }
 
 int	dump_files(t_ft_options op)
 {
-	int				i;
-	int				rest;
-	int				add;
-	int				fp;
-	int				res;
+	int	i;
+	int	add;
+	int	fp;
+	int	res;
 
 	i = 0;
 	add = 0;
@@ -127,13 +108,14 @@ int	dump_files(t_ft_options op)
 	{
 		fp = open_file(op.files[i], op.basename);
 		res |= fp < 0;
-		rest = dump_file(&add, fp, op.cols);
+		dump_file(&add, fp, op.cols);
 		i++;
 	}
+	show_errno(op.files[op.size -1], op.basename);
 	if (add != 0)
 	{
-		if (rest > 0)
-			put_dump_line(add, g_bytes, rest, op.cols);
+		if (add % 16 != 0)
+			put_dump_line(add, g_bytes, add % 16, op.cols);
 		ft_put_hexa(add, op.cols);
 		write(1, "\n", 1);
 	}

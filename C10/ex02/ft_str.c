@@ -37,7 +37,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	unsigned int	i;
 
 	i = 0;
-	while (src[i] && i < n)
+	while (i < n)
 	{
 		dest[i] = src[i];
 		i++;

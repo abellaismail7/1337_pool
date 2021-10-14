@@ -34,27 +34,27 @@ void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 		}	
 	}
 }
-
-int ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return i;
-}
-
-int ft_strlen_cmp(char *s1, char *s2)
-{
-	return ft_strlen(s1) - ft_strlen(s2);
-}
-
-#include<stdio.h>
-int main(int ac, char **av)
-{
-	ft_advanced_sort_string_tab(av + 1, &ft_strlen_cmp);
-
-	for(int i = 1; i < ac; i++)
-		printf("%s \n", av[i]);
-}
+//
+//int ft_strlen(char *str)
+//{
+//	int i;
+//
+//	i = 0;
+//	while (str[i])
+//		i++;
+//	return i;
+//}
+//
+//int ft_strlen_cmp(char *s1, char *s2)
+//{
+//	return ft_strlen(s1) - ft_strlen(s2);
+//}
+//
+//#include<stdio.h>
+//int main(int ac, char **av)
+//{
+//	ft_advanced_sort_string_tab(av + 1, &ft_strlen_cmp);
+//
+//	for(int i = 1; i < ac; i++)
+//		printf("%s \n", av[i]);
+//}

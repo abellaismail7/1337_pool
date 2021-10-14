@@ -1,7 +1,7 @@
 CC 		= gcc
 CCFLAGS = -Wall -Werror -Wextra -I./includes
 
-FILES 	= ft_hexdump util ft_str ft_hex
+FILES 	= ft_hexdump util ft_str ft_hex ft_error
 SRC		= $(FILES:=.c)
 OBJ		= $(FILES:=.o)
 EXEC	= ft_hexdump

@@ -32,7 +32,7 @@ void	show_help(int out, char *basename)
 {
 	write(out, "usage: ", 7);
 	write(out, basename, ft_strlen(basename));
-	write(out, " [-c #] [file ...]", 18);
+	write(out, " [-c #] [file ...]\n", 19);
 }
 
 int	show_error(char *msg, char *arg, char *basename, int help)
