@@ -16,16 +16,13 @@
 #include <libgen.h>
 #include "util.h"
 #include "ft_str.h"
-#include "ft_options.h"
 
 int	main(int ac, char **av)
 {
-	int				i;
 	int				j;
 	int				expanded;
 	t_ft_options	op;
 
-	i = 2;
 	j = 0;
 	expanded = (av[1] && ft_strcmp("-C", av[1]) == 0);
 	op.basename = basename(av[0]);
