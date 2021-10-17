@@ -16,6 +16,7 @@
 #include <libgen.h>
 #include "util.h"
 #include "ft_const.h"
+#include "ft_str.h"
 
 int	get_count(int ac, char **av)
 {
